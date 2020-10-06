@@ -1,0 +1,24 @@
+<div class="loading" *ngIf="loading">Loading&#8230;</div>
+
+<div>
+    <a *ngFor='let user of userList' class="user" (click)="getPosts(user.id, user.name)">
+        {{user.name}}
+    </a>
+</div>
+
+<div *ngIf="postList">
+    <h4>Posts from {{selectedUser}}</h4>
+    <div *ngFor="let post of postList" class="post" (click)="getComments(post.id)">
+        <div class="accordion collapsible"><strong>{{post.title}}</strong></div>
+        <div>{{post.body}}</div>
+        <div *ngIf="selectedPost == post.id">
+            <div *ngFor="let comment of commentList" class="comment">
+                <span><strong>{{comment.name}} : </strong></span>
+                <span>{{comment.body}} </span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="javascript:;" (click)="loadAll()"> Load All</a>
+    </div>
+</div>
