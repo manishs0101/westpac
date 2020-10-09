@@ -1,4 +1,5 @@
 <div class="loading" *ngIf="loading">Loading&#8230;</div>
+<div *ngIf="errorMessage">{{errorMessage}}</div>
 
 <div>
     <a *ngFor='let user of userList' class="user" (click)="getPosts(user.id, user.name)">

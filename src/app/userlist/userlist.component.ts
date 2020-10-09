@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../model/users';
-import { UsersService } from '../users.service';
+import { UsersService } from './users.service';
 
 @Component({
   selector: 'app-userlist',
@@ -15,6 +15,7 @@ export class UserlistComponent implements OnInit {
   loading: boolean;
   selectedUser: string;
   selectedPost: number;
+  errorMessage: string;
 
   constructor(private usersService: UsersService) { }
 
@@ -39,6 +40,9 @@ export class UserlistComponent implements OnInit {
         this.postList = data.slice(0, 3);
       }
       this.loading = false;
+    }, (error) => {
+      this.errorMessage = error;
+      this.loading = false;
     });
   }
 
@@ -57,7 +61,9 @@ export class UserlistComponent implements OnInit {
       if (data) {
         this.commentList = data;
       }
-      console.log(data);
+      this.loading = false;
+    }, (error) => {
+      this.errorMessage = error;
       this.loading = false;
     });
   }
